@@ -18,9 +18,7 @@
 #include "esp_sntp.h"
 #include "nvs_flash.h"
 #include "trace.h"
-
-#define SSID "Koole Controls"
-#define PSWD "K@u5tGD!8Ug&X!rc"
+#include "defines.h"
 
 using namespace idf;
 using namespace std;

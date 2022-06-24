@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{803FD0C6-D64E-4E16-9DC3-1DAEC859A3D2}") = "EmbeddedProject1", "EmbeddedProject1.vgdbproj", "{9F6D0DBA-968F-4A07-893E-90285E3FCC0E}"
+Project("{803FD0C6-D64E-4E16-9DC3-1DAEC859A3D2}") = "TraceDebug", "TraceDebug.vgdbproj", "{7FE1C3F3-1DD3-43D4-8E62-CF591E7F0F4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|VisualGDB = Release|VisualGDB
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9F6D0DBA-968F-4A07-893E-90285E3FCC0E}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
-		{9F6D0DBA-968F-4A07-893E-90285E3FCC0E}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
-		{9F6D0DBA-968F-4A07-893E-90285E3FCC0E}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
-		{9F6D0DBA-968F-4A07-893E-90285E3FCC0E}.Release|VisualGDB.Build.0 = Release|VisualGDB
+		{7FE1C3F3-1DD3-43D4-8E62-CF591E7F0F4E}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{7FE1C3F3-1DD3-43D4-8E62-CF591E7F0F4E}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{7FE1C3F3-1DD3-43D4-8E62-CF591E7F0F4E}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{7FE1C3F3-1DD3-43D4-8E62-CF591E7F0F4E}.Release|VisualGDB.Build.0 = Release|VisualGDB
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C160BEC4-42CC-4B8B-BBB1-14C8A800A1CF}
+		SolutionGuid = {A6BA9254-5083-4C1C-9774-49E8628736AE}
 	EndGlobalSection
 EndGlobal
