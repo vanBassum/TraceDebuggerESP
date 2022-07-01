@@ -328,6 +328,9 @@ public:
 		
 		Traces.push_back(trace);
 		
+		
+		
+		
 		task.SetCallback(this, &TraceDebugger::Work);
 		
 	}

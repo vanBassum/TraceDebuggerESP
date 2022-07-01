@@ -25,7 +25,7 @@
 using namespace idf;
 using namespace std;
 
-TraceDebugger tracer;
+
 
 esp_err_t event_handler(void* ctx, system_event_t* event)
 {
@@ -92,6 +92,11 @@ public:
 	{
 		stateMachine.Start("First controller", 7, 2048, NULL);
 	}
+	
+	void AttachTracer(TraceDebugger* tracer, int traceNo)
+	{
+		stateMachine.AttachTracer(tracer, traceNo);
+	}
 };
 
 
@@ -129,6 +134,11 @@ public:
 	{
 		stateMachine.Start("Second controller", 7, 2048, NULL);
 	}
+	
+	void AttachTracer(TraceDebugger* tracer, int traceNo)
+	{
+		stateMachine.AttachTracer(tracer, traceNo);
+	}
 };
 
 
@@ -137,8 +147,12 @@ extern "C" void app_main(void)
 	StartWIFI();
 	vTaskDelay(5000 / portTICK_PERIOD_MS);
 	
+	TraceDebugger tracer;
 	FirstController firstController;
 	SecondController secondController;
+	
+	firstController.AttachTracer(&tracer, 1);
+	secondController.AttachTracer(&tracer, 2);
 	
 	tracer.Start();
 	firstController.StartWork();
