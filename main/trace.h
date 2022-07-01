@@ -157,6 +157,9 @@ public:
 	double offset;
 };
 
+
+
+
 class TraceDebugger
 {
 public:
@@ -306,6 +309,8 @@ public:
 		if (!commands.Enqueue((Command**)&cmd, 1000))
 			delete cmd;
 	}
+	
+	
 	
 	TraceDebugger()
 	{

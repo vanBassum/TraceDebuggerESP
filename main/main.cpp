@@ -13,12 +13,14 @@
 #include "gpio_cxx.hpp"
 #include "lib/tcpip/tcplistener.h"
 #include <list>
+#include <vector>
 #include <string.h>
 #include "esp_wifi.h"
 #include "esp_sntp.h"
 #include "nvs_flash.h"
 #include "trace.h"
 #include "defines.h"
+#include "lib/misc/statemachine.h"
 
 using namespace idf;
 using namespace std;
@@ -55,18 +57,100 @@ void StartWIFI()
 }
 
 
+
+class FirstController
+{
+	StateMachine stateMachine;
+	
+	void State_Initial(StatemachineInfo* info)
+	{
+		DateTime timeToSwitch = info->lastStateChange + TimeSpan::FromSeconds(10);
+		if (DateTime::Now() > timeToSwitch)
+		{
+			info->nextState = 1;
+		}
+	}
+	
+	void State_DoSomething(StatemachineInfo* info)
+	{
+		DateTime timeToSwitch = info->lastStateChange + TimeSpan::FromSeconds(10);
+		if (DateTime::Now() > timeToSwitch)
+		{
+			info->nextState = 0;
+		}
+	}
+
+public:
+	
+	FirstController()
+	{
+		stateMachine.AddState(0, "Initial", this, &FirstController::State_Initial);
+		stateMachine.AddState(1, "DoSomething", this, &FirstController::State_DoSomething);
+	}
+	
+	void StartWork()
+	{
+		stateMachine.Start("First controller", 7, 2048, NULL);
+	}
+};
+
+
+class SecondController
+{
+	StateMachine stateMachine;
+	
+	void State_Initial(StatemachineInfo* info)
+	{
+		DateTime timeToSwitch = info->lastStateChange + TimeSpan::FromSeconds(10);
+		if (DateTime::Now() > timeToSwitch)
+		{
+			info->nextState = 1;
+		}
+	}
+	
+	void State_DoSomething(StatemachineInfo* info)
+	{
+		DateTime timeToSwitch = info->lastStateChange + TimeSpan::FromSeconds(10);
+		if (DateTime::Now() > timeToSwitch)
+		{
+			info->nextState = 0;
+		}
+	}
+
+public:
+	
+	SecondController()
+	{
+		stateMachine.AddState(0, "Initial", this, &SecondController::State_Initial);
+		stateMachine.AddState(1, "DoSomething", this, &SecondController::State_DoSomething);
+	}
+	
+	void StartWork()
+	{
+		stateMachine.Start("Second controller", 7, 2048, NULL);
+	}
+};
+
+
 extern "C" void app_main(void)
 {
 	StartWIFI();
 	vTaskDelay(5000 / portTICK_PERIOD_MS);
+	
+	FirstController firstController;
+	SecondController secondController;
+	
 	tracer.Start();
-	int i = 0;
+	firstController.StartWork();
+	secondController.StartWork();
+
+	
 	while (true)
 	{
-		double timeSinceStart = esp_timer_get_time();
-		timeSinceStart /= 1000000;
-		tracer.SendMeasurementTest(timeSinceStart, i, 1);
-		i++;
+		//double timeSinceStart = esp_timer_get_time();
+		//timeSinceStart /= 1000000;
+		//tracer.SendMeasurementTest(timeSinceStart, i, 1);
+		//i++;
 		vTaskDelay(5000 / portTICK_PERIOD_MS);
 	}
 }
